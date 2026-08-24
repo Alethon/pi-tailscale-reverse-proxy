@@ -1,16 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ============================================================
-# CONFIGURE THESE BEFORE RUNNING
-# ============================================================
-BACKEND_IP="192.168.1.50"    # IP/hostname of what you're proxying to (Jellyfin directly, or e.g. an OPNsense frontend)
-BACKEND_PORT="8096"          # e.g. 8096 for Jellyfin directly, 443 for an HTTPS frontend like OPNsense
-BACKEND_SCHEME="http"        # "http" or "https" — use "https" for things like an OPNsense web frontend
-FOREIGN_IFACE=""             # e.g. "eth0" or "wlan0" — the interface on the foreign network.
-                              # Leave blank to have nginx listen on all interfaces instead of just this one.
-AUTH_KEY=""                   # Tailscale auth key
-# ============================================================
+# Source the environment variables
+source .env
 
 echo "== Step 1: Update system =="
 sudo apt update && sudo apt upgrade -y
